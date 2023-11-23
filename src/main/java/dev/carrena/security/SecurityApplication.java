@@ -1,14 +1,9 @@
 package dev.carrena.security;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
+import dev.carrena.security.util.SecretKeyGenerator;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-
-import javax.crypto.SecretKey;
 
 @SpringBootApplication
 public class SecurityApplication {
@@ -18,12 +13,11 @@ public class SecurityApplication {
 	}
 
 
-
+//@Bean
 	CommandLineRunner command(){
 		return args -> {
-			SecretKey secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-
-			System.out.println(secretKey.toString());
+			var key = SecretKeyGenerator.generateKey();
+			System.out.println(key);
 		};
 	}
 }
